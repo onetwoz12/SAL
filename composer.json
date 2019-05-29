@@ -1,0 +1,8 @@
+{
+    "name": "onetwoz12/hyi",
+    "description": "masturbate",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {"classmap": ["src"]}
+}
