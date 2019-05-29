@@ -3,6 +3,8 @@
     "description": "masturbate",
     "license": "proprietary",
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "onetwoz12/parse": "dev-master"
+    },
     "autoload": {"classmap": ["src"]}
 }

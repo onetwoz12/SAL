@@ -22,7 +22,7 @@ class parseDrive2{
             }
         }
         if (!$__users){
-            return getLinks($__search, true, $__links);
+            return $this->getLinks($__search, true, $__links);
         }
         return $__links;
     }
