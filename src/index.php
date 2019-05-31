@@ -66,29 +66,34 @@ class parse_drive2{
         $values = '';
         $firstCar = true;
         $lastCar = false;
+        $forPrint ='';
         foreach($arr as $key => $value){
             if (!is_numeric($key) && $value != ''){
                 if (preg_match('/car/uis', $key)){
                     if (!$isManyCars){
                         $inserts .= 'cars, ';
                         $values .= '\''.trim(strip_tags($value)).'\', ';
+                        $forPrint .= trim(strip_tags($value)); 
                         continue;
                     }
                     elseif($firstCar){
                         $inserts .= 'cars, ';
                         $values .= '\''.trim(strip_tags($value)).', ';
                         $firstCar = false;
+                        $forPrint .= trim(strip_tags($value)).', ';
                         continue;
                     }
                     else{
                         $lastCar = true;
                         $values .= trim(strip_tags($value)).', ';
+                        $forPrint .= trim(strip_tags($value)).', ';
                         continue;
                     }
                 }
                 if ($lastCar){
                     $lastCar = false;
                     $values = substr($values, 0, -2).'\', ';
+                    $forPrint = substr($forPrint, 0, -2);
                 }
                 if($key == 'count_of_comments'){
                     $count = 0;
@@ -106,5 +111,7 @@ class parse_drive2{
         }
         $query = "INSERT INTO user (".$inserts."link) VALUE (".$values."'$__link')";
         mysqli_query($__mysql, $query);
+        print '<p id="user">Имя: '.$arr['name'].'<br />Никнейм: '.$arr['nickname'].'<br />Возраст: '.$arr['age'].'<br />Дата регистрации: '.$arr['registration_date'].'<br />Город: '.$arr['city'].'<br />Машины: '.$forPrint.'<br />О себе: '.strip_tags($arr['about_yourself']).'<br />Последний раз был в сети: '.$arr['last_time_was_online'].'<br />Количество комментариев: '.$arr['count_of_comments'].'<br /><a href="'.$__link.'">Ссылка на страницу</a></p>';
+        flush();
     }
 }
