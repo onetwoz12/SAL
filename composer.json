@@ -1,10 +1,10 @@
 {
-    "name": "onetwoz12/parse",
+    "name": "onetwoz12/parseDrive2",
     "description": "parsing drive2.ru",
     "license": "proprietary",
     "minimum-stability": "dev",
     "require": {
-        "onetwoz12/parse": "dev-master"
+        "onetwoz12/parseDrive2": "dev-master"
     },
     "autoload": {"classmap": ["src"]}
 }
