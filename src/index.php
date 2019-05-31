@@ -1,6 +1,6 @@
 <?php
 
-class parseDrive2{
+class parse_drive2{
 
     function getLinks($__search, $__users = false, $__links = array()){
         $users = $__users
