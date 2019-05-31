@@ -7,13 +7,16 @@ class parse_drive2{
             ?   '&category=Users'
             :   '';
         $page = file_get_contents('https://www.drive2.ru/search/?text='.urlencode($__search).$users);
-        if (preg_match('/Поиск\sничего\sне\sнашёл/uis', $page, $nothing)){
+        if (preg_match('/Поиск\sничего\sне\sнашёл/uis', $page)){
             return 'Ничего не найдено!';
         }
         preg_match('/title=\"([0-9]+)\">Последняя<\/a>/uis', $page, $pages);
-        for ($i = 0; $i < $pages[1]; ++$i){
+        $pagesCount = isset($pages[1])
+            ?   $pages[1]
+            :   1;
+        for ($i = 0; $i < $pagesCount; ++$i){
             $finds = array();
-            if (preg_match_all('/<a\sclass=\"c-block\sc-serp-item\"\shref=\"(https:\/\/www\.drive2\.ru\/users\/.+?\/)/uis', file_get_contents('https://www.drive2.ru/search/?page='.$i.'&text='.urlencode($__search).$users), $finds)){
+            if (preg_match_all('/<a\sclass=\"c-block\sc-serp-item\"\shref=\"(https:\/\/www\.drive2\.ru\/users\/.+?\/)\"/uis', file_get_contents('https://www.drive2.ru/search/?page='.$i.'&text='.urlencode($__search).$users), $finds)){
                 foreach($finds[1] as $link){
                     if (!in_array($link, $__links)){
                         $__links[] = $link;
@@ -58,6 +61,7 @@ class parse_drive2{
         .*?<div\sclass=\"user-about\stext\stext--xs\">.*?<p>(?<About_yourself>.*?)<\/div>)?
         (.*?<div\sclass=\"c-ministats__item\">.*?<span\sdata-tt=\"Зарегистрировал(ся|ась)(?<registration_date>.*?)\">.*?<\/span>.*?<\/div>.*?<div\sclass=\"c-ministats__item\">\s(?<count_of_comments>.*?)<\/div>.*?<\/div>)?/xuis';
         preg_match($pattern, $site, $arr);
+        $arr[] = $__link;
         $inserts = '';
         $values = '';
         $firstCar = true;
