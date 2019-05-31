@@ -56,7 +56,7 @@ class parse_drive2{
         $pattern .= '(.*?<div\sclass=\"user-about\stext\stext--xs\">.*?<p>.*?<button.*?<div\sid=\"user-about-full\"\sstyle=\"display\:\snone\;\">.*?<p>(?<about_yourself>.*?)<\/div>
         |
         .*?<div\sclass=\"user-about\stext\stext--xs\">.*?<p>(?<About_yourself>.*?)<\/div>)?
-        (.*?<div\sclass=\"c-ministats__item\">.*?<span\sdata-tt=\"(?<registration_date>.*?)\">.*?<\/span>.*?<\/div>.*?<div\sclass=\"c-ministats__item\">\s(?<count_of_comments>.*?)<\/div>.*?<\/div>)?/xuis';
+        (.*?<div\sclass=\"c-ministats__item\">.*?<span\sdata-tt=\"Зарегистрировал(ся|ась)(?<registration_date>.*?)\">.*?<\/span>.*?<\/div>.*?<div\sclass=\"c-ministats__item\">\s(?<count_of_comments>.*?)<\/div>.*?<\/div>)?/xuis';
         preg_match($pattern, $site, $arr);
         $inserts = '';
         $values = '';
